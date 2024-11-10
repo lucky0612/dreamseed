@@ -3,12 +3,27 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SolutionGenerator from './components/SolutionGenerator';
 import VisualizationMap from './components/VisualizationMap';
 import ValidationPanel from './components/ValidationPanel';
+import SolutionMarketplace from './components/SolutionMarketplace';
+import CollaborativeHub from './components/CollaborativeHub';
 import useDreamSeedStore from './store/store';
 import Button from './components/shared/Button';
 
+type MainTab = 'dashboard' | 'marketplace' | 'collaborate' | 'visualization' | 'validation';
+
 function App() {
     const { currentSolution } = useDreamSeedStore();
-    const [activeTab, setActiveTab] = useState<'generator' | 'visualization' | 'validation'>('generator');
+    const [activeTab, setActiveTab] = useState<MainTab>('dashboard');
+
+    const mainTabs = [
+        { id: 'dashboard', label: 'Dashboard', icon: '🌱' },
+        { id: 'marketplace', label: 'Solution Marketplace', icon: '🌍' },
+        { id: 'collaborate', label: 'Collaboration Hub', icon: '👥' }
+    ];
+
+    const solutionTabs = [
+        { id: 'visualization', label: 'Innovation Map', icon: '🗺️' },
+        { id: 'validation', label: 'Validation & Analysis', icon: '📊' }
+    ];
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-moss-50 via-emerald-water-50 to-forest-50 animate-gradient-xy">
@@ -32,25 +47,44 @@ function App() {
                     </p>
                 </motion.div>
 
-                {/* Navigation Tabs */}
+                {/* Main Navigation Tabs */}
+                <div className="flex justify-center mb-8">
+                    <div className="bg-white/30 backdrop-blur-sm rounded-full p-1 shadow-lg">
+                        <div className="flex space-x-2">
+                            {mainTabs.map((tab) => (
+                                <Button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id as MainTab)}
+                                    variant={activeTab === tab.id ? 'primary' : 'outline'}
+                                    className={`relative px-6 py-2 rounded-full transition-all duration-200
+                                        ${activeTab === tab.id
+                                            ? 'text-white'
+                                            : 'text-forest-600 hover:text-forest-700'}`}
+                                >
+                                    <span className="mr-2">{tab.icon}</span>
+                                    {tab.label}
+                                </Button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Solution-specific Tabs - Only shown when there's a current solution */}
                 {currentSolution && (
                     <div className="flex justify-center mb-8">
                         <div className="bg-white/30 backdrop-blur-sm rounded-full p-1 shadow-lg">
                             <div className="flex space-x-2">
-                                {[
-                                    { id: 'generator', label: 'Solution Generator' },
-                                    { id: 'visualization', label: 'Innovation Map' },
-                                    { id: 'validation', label: 'Validation & Analysis' }
-                                ].map((tab) => (
+                                {solutionTabs.map((tab) => (
                                     <Button
                                         key={tab.id}
-                                        onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                                        onClick={() => setActiveTab(tab.id as MainTab)}
                                         variant={activeTab === tab.id ? 'primary' : 'outline'}
                                         className={`relative px-6 py-2 rounded-full transition-all duration-200
-                      ${activeTab === tab.id
+                                            ${activeTab === tab.id
                                                 ? 'text-white'
                                                 : 'text-forest-600 hover:text-forest-700'}`}
                                     >
+                                        <span className="mr-2">{tab.icon}</span>
                                         {tab.label}
                                     </Button>
                                 ))}
@@ -68,9 +102,11 @@ function App() {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
                     >
-                        {activeTab === 'generator' && <SolutionGenerator />}
-                        {activeTab === 'visualization' && <VisualizationMap />}
-                        {activeTab === 'validation' && <ValidationPanel />}
+                        {activeTab === 'dashboard' && <SolutionGenerator />}
+                        {activeTab === 'marketplace' && <SolutionMarketplace />}
+                        {activeTab === 'collaborate' && <CollaborativeHub />}
+                        {activeTab === 'visualization' && currentSolution && <VisualizationMap />}
+                        {activeTab === 'validation' && currentSolution && <ValidationPanel />}
                     </motion.div>
                 </AnimatePresence>
 
