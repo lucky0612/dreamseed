@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: system-ui, sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply text-forest-800 bg-moss-50;
+    }
+}
+
+@layer components {
+    .glass-card {
+        @apply bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg;
+    }
+
+    .eco-gradient {
+        @apply bg-gradient-to-br from-moss-50 via-emerald-water-50 to-forest-50;
+    }
+
+    .input-eco {
+        @apply w-full px-4 py-2.5 rounded-lg border-2 border-moss-200 focus:border-emerald-water-400 focus:ring-2 focus:ring-emerald-water-200 bg-white/50 backdrop-blur-sm transition duration-200;
+    }
+
+    .btn-eco {
+        @apply px-4 py-2 rounded-lg font-medium transition duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-water-400;
+    }
+
+    .btn-eco-primary {
+        @apply btn-eco bg-emerald-water-500 hover:bg-emerald-water-600 text-white shadow-lg;
+    }
+
+    .btn-eco-secondary {
+        @apply btn-eco bg-moss-500 hover:bg-moss-600 text-white shadow-lg;
+    }
+
+    .btn-eco-outline {
+        @apply btn-eco border-2 border-emerald-water-500 text-emerald-water-500 hover:bg-emerald-water-50;
+    }
+}
+
+/* Custom Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-gradient {
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-moss-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-emerald-water-300 rounded-full hover:bg-emerald-water-400 transition-colors duration-200;
+}
+
+/* Loading Animations */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* Transitions */
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Focus Styles */
+.focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-emerald-water-400 focus:ring-offset-2;
+}
+
+/* Card Hover Effects */
+.hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg;
+}

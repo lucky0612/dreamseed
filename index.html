@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/leaf-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4b8467" />
+    <meta name="description"
+        content="DreamSeed - AI-Powered Environmental Innovation Platform. Generate, visualize, and validate sustainable solutions for environmental challenges." />
+    <meta name="keywords" content="environmental innovation, AI solutions, sustainability, green technology" />
+    <title>DreamSeed - Environmental Innovation Platform</title>
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="DreamSeed - Environmental Innovation Platform" />
+    <meta property="og:description"
+        content="AI-Powered platform for generating and validating environmental solutions" />
+    <meta property="og:image" content="/dreamseed-social.png" />
+
+    <!-- Preload fonts -->
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Add a nice loading state -->
+    <div id="loader" class="fixed inset-0 bg-moss-50 flex items-center justify-center z-50">
+        <div class="text-center">
+            <div
+                class="w-16 h-16 border-4 border-emerald-water-200 border-t-emerald-water-500 rounded-full animate-spin">
+            </div>
+            <p class="mt-4 text-forest-600">Loading DreamSeed...</p>
+        </div>
+    </div>
+
+    <script>
+        // Remove loader when app is ready
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.5s ease-out';
+            setTimeout(() => loader.remove(), 500);
+        });
+    </script>
+</body>
+
+</html>
