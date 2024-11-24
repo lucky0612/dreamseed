@@ -29,7 +29,13 @@ DreamSeed is an innovative platform that leverages AI to generate, visualize, an
    ```
 4. Start the development server: `npm run dev`
 
-## Documentation
+## Images
+![Image 1](images/1.jpg)
+![Image 2](images/2.jpg)
+![Image 3](images/3.jpg)
+![Image 4](images/4.jpg)
+![Image 5](images/5.jpg)
+![Image 6](images/6.jpg)
 
 [Add documentation links and details]
 
